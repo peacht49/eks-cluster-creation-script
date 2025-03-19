@@ -36,7 +36,7 @@ jobs:
 
     # Step 5:  Add bitnami
     - name: Add Bitnami Helm repo and update
-        run: |
+      run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo update
 
