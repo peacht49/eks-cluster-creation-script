@@ -35,11 +35,6 @@ jobs:
         helm-version: 'v3.x' # Specify the Helm version
 
     # Step 5:  Add bitnami
-    - name: Add Bitnami Helm repo and update
-      run: |
-          helm init
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo update
 
     # Step 6: Configure kubeconfig for EKS
     - name: Set up kubeconfig
@@ -49,7 +44,7 @@ jobs:
     # Step 7: Deploy kube-prometheus-stack using Helm
     - name: Deploy kube-prometheus-stack
       run: |
-        helm init
+        helm init --stable-repo-url https://charts.helm.sh/stable
         helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
         helm repo update
         helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
