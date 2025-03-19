@@ -42,7 +42,8 @@ jobs:
     # Step 6: Deploy kube-prometheus-stack using Helm
     - name: Deploy kube-prometheus-stack
       run: |
-        export HELM_HOME=/tmp/helm
+        mkdir -p /home/runner/.helm/repository
+        touch /home/runner/.helm/repository/repositories.yaml
         helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
         helm repo update
         helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
