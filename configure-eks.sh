@@ -66,8 +66,7 @@ if [[ "$answer" == "Y" ]]; then
     --nodes-min "$min_nodes" \
     --nodes-max "$max_nodes" \
     --managed \
-    --region "$region" \
-    --without-nodegroup
+    --region "$region" 
   elif [[ "$answer" == "N" ]]; then
     read -p "Input region: " region
     eksctl create cluster \
@@ -79,8 +78,9 @@ if [[ "$answer" == "Y" ]]; then
     --nodes-min "$min_nodes" \
     --nodes-max "$max_nodes" \
     --managed \
-    --region "$region" \
-    --without-nodegroup
+    --region "$region" 
   else
     echo "Input Y or N only"
 fi 
+
+
