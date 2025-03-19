@@ -83,6 +83,6 @@ if [[ "$answer" == "Y" ]]; then
     echo "Input Y or N only"
 fi 
 
-# Configure kubectl to access cluster once created -1
+# Configure kubectl to access cluster once created 
 aws eks --region $region update-kubeconfig --name $(eksctl get clusters --output json | jq -r '.[0].name')
 
