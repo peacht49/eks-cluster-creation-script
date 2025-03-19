@@ -34,12 +34,18 @@ jobs:
       with:
         helm-version: 'v3.x' # Specify the Helm version
 
-    # Step 5: Configure kubeconfig for EKS
+    # Step 5:  Add bitnami
+    - name: Add Bitnami Helm repo and update
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
+
+    # Step 6: Configure kubeconfig for EKS
     - name: Set up kubeconfig
       run: |
         aws eks --region ${{ secrets.AWS_REGION }} update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }}
 
-    # Step 6: Deploy kube-prometheus-stack using Helm
+    # Step 7: Deploy kube-prometheus-stack using Helm
     - name: Deploy kube-prometheus-stack
       run: |
         helm init
@@ -48,7 +54,7 @@ jobs:
         helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
           --namespace monitoring --create-namespace \
 
-    # Step 7: Verify the deployment (Optional)
+    # Step 8: Verify the deployment (Optional)
     - name: Verify Deployment
       run: |
         kubectl get pods -n monitoring
